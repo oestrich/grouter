@@ -1,0 +1,12 @@
+package router
+
+import (
+  "io"
+  "http"
+)
+
+func Router(writer http.ResponseWriter, r *http.Request) {
+  io.WriteString(writer, "Hit a page\n")
+  io.WriteString(writer, r.Method + "\n")
+  io.WriteString(writer, r.URL.Raw + "\n")
+}
