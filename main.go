@@ -12,7 +12,7 @@ var port = flag.Int("p", 3000, "port to host on")
 func main() {
   flag.Parse()
 
-  http.HandleFunc("/", router.RoutePath)
+  router.SetupRouter()
 
   addr := fmt.Sprint(":", *port)
 

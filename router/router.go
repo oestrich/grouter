@@ -10,3 +10,7 @@ func RoutePath(writer http.ResponseWriter, r *http.Request) {
   io.WriteString(writer, r.Method + "\n")
   io.WriteString(writer, r.URL.Raw + "\n")
 }
+
+func SetupRouter() {
+  http.HandleFunc("/", RoutePath)
+}
