@@ -5,10 +5,21 @@ import (
   "http"
 )
 
+var WebRouter = &Router{}
+
 func RoutePath(writer http.ResponseWriter, r *http.Request) {
-  io.WriteString(writer, "Hit a page\n")
-  io.WriteString(writer, r.Method + "\n")
-  io.WriteString(writer, r.URL.Raw + "\n")
+  route, vars := WebRouter.ParseRoute(r.URL.Raw)
+
+  if route != nil {
+    io.WriteString(writer, "Matched a Route!\n")
+
+    for k, v := range vars {
+      io.WriteString(writer, k + " => " + v + "\n")
+    }
+  } else {
+    writer.WriteHeader(http.StatusNotFound)
+    io.WriteString(writer, "404 Page Not Found")
+  }
 }
 
 func SetupRouter() {

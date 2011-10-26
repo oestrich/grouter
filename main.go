@@ -20,6 +20,8 @@ func main() {
     os.Exit(0)
   }
 
+  router.WebRouter.Append(router.Route{Path: "/posts/:id"})
+
   router.SetupRouter()
 
   addr := fmt.Sprint(":", *port)
