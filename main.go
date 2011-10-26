@@ -26,7 +26,6 @@ func main() {
   }
 
   router.WebRouter.Append(router.Route{Path: "/posts/:id", Handler: HomePage})
-
   router.SetupRouter()
 
   addr := fmt.Sprint(":", *port)
