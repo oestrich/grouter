@@ -5,12 +5,19 @@ import (
   "http"
   "flag"
   "router"
+  "os"
 )
 
 var port = flag.Int("p", 3000, "port to host on")
+var test = flag.Bool("t", false, "run tests")
 
 func main() {
   flag.Parse()
+
+  if *test {
+    router.TestParsing()
+    os.Exit(0)
+  }
 
   router.SetupRouter()
 
