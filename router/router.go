@@ -24,10 +24,14 @@ func (r *Route) Split() []string {
   return strings.Split(r.Path, "/")
 }
 
-func (r *Route) ParseRoute(path string) (string, map[string]string) {
+func (r *Route) ParseRoute(path string) (bool, string, map[string]string) {
   vars := make(map[string]string)
   sections_route := r.Split()
   sections_path := strings.Split(path, "/")
+
+  if len(sections_route) != len(sections_path) {
+    return false, "", vars
+  }
 
   for i := 0; i < len(sections_route); i++ {
     if sections_route[i] == "" {
@@ -41,5 +45,5 @@ func (r *Route) ParseRoute(path string) (string, map[string]string) {
     }
   }
 
-  return "handler", vars
+  return true, "handler", vars
 }
