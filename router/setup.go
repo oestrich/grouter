@@ -3,11 +3,14 @@ package router
 import (
   "io"
   "http"
+  "fmt"
 )
 
 var WebRouter = &Router{}
 
 func RoutePath(writer http.ResponseWriter, r *http.Request) {
+  fmt.Println("Accessing page " + r.URL.Raw)
+
   route, vars := WebRouter.ParseRoute(r.URL.Raw)
 
   if route != nil {
