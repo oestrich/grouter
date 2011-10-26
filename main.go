@@ -16,6 +16,7 @@ func main() {
 
   if *test {
     router.TestParsing()
+    router.TestRouterParsing()
     os.Exit(0)
   }
 

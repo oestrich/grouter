@@ -10,6 +10,10 @@ type Route struct {
   Path string
 }
 
+type Router struct {
+  Routes []Route
+}
+
 func RoutePath(writer http.ResponseWriter, r *http.Request) {
   io.WriteString(writer, "Hit a page\n")
   io.WriteString(writer, r.Method + "\n")
@@ -22,6 +26,10 @@ func SetupRouter() {
 
 func (r *Route) Split() []string {
   return strings.Split(r.Path, "/")
+}
+
+func (router *Router) Append(route Route) {
+  router.Routes = append(router.Routes, route)
 }
 
 func (r *Route) ParseRoute(path string) (bool, string, map[string]string) {
@@ -47,4 +55,16 @@ func (r *Route) ParseRoute(path string) (bool, string, map[string]string) {
   }
 
   return true, "handler", vars
+}
+
+func (r *Router) ParseRoute(path string) (*Route, map[string]string) {
+  for i := 0; i < len(r.Routes); i++ {
+    pass, _, vars := r.Routes[i].ParseRoute(path)
+
+    if pass {
+      return &r.Routes[i], vars
+    }
+  }
+
+  return nil, nil
 }
