@@ -19,3 +19,11 @@ func (r *Router) ParseRoute(path string) (*Route, map[string]string) {
 
   return nil, nil
 }
+
+func (r *Router) AddController(controller Controller) {
+  routes := controller.Routes()
+
+  for i := 0; i < len(routes); i++ {
+    WebRouter.Append(routes[i])
+  }
+}
