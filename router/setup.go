@@ -16,6 +16,8 @@ func RoutePath(writer http.ResponseWriter, r *http.Request) {
     for k, v := range vars {
       io.WriteString(writer, k + " => " + v + "\n")
     }
+
+    route.Handler(writer, r, vars)
   } else {
     writer.WriteHeader(http.StatusNotFound)
     io.WriteString(writer, "404 Page Not Found")

@@ -2,10 +2,12 @@ package router
 
 import (
   "strings"
+  "http"
 )
 
 type Route struct {
   Path string
+  Handler func (http.ResponseWriter, *http.Request, map[string]string)
 }
 
 func (r *Route) Split() []string {
