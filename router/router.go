@@ -38,10 +38,11 @@ func (r *Route) ParseRoute(path string) (bool, string, map[string]string) {
       continue
     }
 
-    if strings.HasPrefix(sections_route[i], ":") {
-      if i < len(sections_path) {
-        vars[sections_route[i]] = sections_path[i]
-      }
+    switch {
+    case strings.HasPrefix(sections_route[i], ":"):
+      vars[sections_route[i]] = sections_path[i]
+    case sections_route[i] != sections_path[i]:
+      return false, "", vars
     }
   }
 

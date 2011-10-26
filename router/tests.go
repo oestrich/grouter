@@ -18,4 +18,9 @@ func TestParsing() {
   if pass != false {
     fmt.Println("ERROR")
   }
+
+  pass, _, _ = route.ParseRoute("/comments/1")
+  if pass != false {
+    fmt.Println("ERROR")
+  }
 }
