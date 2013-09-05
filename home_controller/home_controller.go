@@ -1,9 +1,9 @@
 package home_controller
 
 import (
-  "router"
-  "http"
+  "net/http"
   "io"
+  "../router"
 )
 
 type Controller struct { }

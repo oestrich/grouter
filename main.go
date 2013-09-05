@@ -2,11 +2,11 @@ package main
 
 import (
   "fmt"
-  "http"
+  "net/http"
   "flag"
-  "router"
   "os"
-  "home_controller"
+  "./router"
+  "./home_controller"
 )
 
 var port = flag.Int("p", 3000, "port to host on")
